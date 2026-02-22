@@ -15,7 +15,7 @@ The workflow includes:
 3. **SQL-Based Analytics**
 4. **Power BI Visual Data Exploration & Dashboarding**
 
-*This project combines database engineering with business intelligence reporting to reveal actionable e-commerce insights.*
+
 
 ---
 
@@ -47,7 +47,7 @@ The raw Amazon sales dataset includes transactional order details such as:
 - Quantity sold
 - Customer segments / regions
 
-> *The dataset may be sourced from internal export or public / sample e-commerce data.*
+
 
 ---
 
