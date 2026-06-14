@@ -1,108 +1,321 @@
-![image alt](https://github.com/MAUZZAM123/Amazon-E-Commerce-Sales-Analysis-Revenue-Insights-MySQL-PowerBI/blob/19d48f021aa81867b1f0979f3b81223c158bfef7/Screenshot%202025-12-03%20103959.png)
-# Amazon-E-Commerce-Sales-Analysis-Revenue-Insights-MySQL-PowerBI
+# 📊 SQL Project: Amazon E-Commerce Sales Analysis
 
-# Amazon E-Commerce Sales Analysis & Revenue Insights (MySQL + Power BI)
+<br>
 
-📊 A Business Intelligence & Data Analytics project to analyze Amazon e-commerce sales, extract revenue insights, and visualize key performance metrics using **MySQL** and **Microsoft Power BI**.
+## 📝 Objectives
 
-Project Overview
+* **Database Setup**: Create and manage an Amazon e-commerce sales database using MySQL.
+* **Data Cleaning**: Validate records and ensure data consistency for accurate analysis.
+* **Exploratory Data Analysis (EDA)**: Analyze sales, customers, products, and seller performance.
+* **Business Analysis**: Use SQL queries to answer real-world business questions and generate actionable insights.
 
-This project performs a comprehensive analysis of Amazon sales data to uncover revenue trends, product performance, and business insights. It uses **relational data modeling**, **SQL querying**, and **interactive BI dashboards** to explore transactional datasets, compute key metrics, and present visually rich insights for decision-making.
+<br>
+<br>
 
-The workflow includes:
-1. **Data Preparation & Cleaning**
-2. **Database Structuring & Normalization (MySQL)**
-3. **SQL-Based Analytics**
-4. **Power BI Visual Data Exploration & Dashboarding**
+## 🗂️ Project Structure
 
+### 1. 📦 Database Setup
 
+#### -Database Creation
 
----
+```sql
+CREATE DATABASE amazon_sales;
+```
 
-## 🛠️ Tools & Technologies
+#### -Table Creation
 
-| Layer | Tools |
-|-------|-------|
-| Data Storage & Querying | MySQL |
-| Data Analysis & Prep | SQL Scripts |
-| Data Visualization & Reporting | Microsoft Power BI (.pbix) |
-| Documentation & Reporting | Word / Markdown |
+Single table: `orders`, structured as follows:
 
+```sql
+CREATE TABLE orders (
+    OrderID INT PRIMARY KEY,
+    CustomerID INT,
+    CustomerName VARCHAR(100),
+    ProductID INT,
+    ProductName VARCHAR(100),
+    Category VARCHAR(50),
+    Brand VARCHAR(50),
+    Quantity INT,
+    UnitPrice DECIMAL(10,2),
+    Discount DECIMAL(10,2),
+    Tax DECIMAL(10,2),
+    ShippingCost DECIMAL(10,2),
+    TotalAmount DECIMAL(10,2),
+    PaymentMethod VARCHAR(50),
+    OrderStatus VARCHAR(50),
+    SellerID INT,
+    OrderDate DATE,
+    City VARCHAR(50),
+    State VARCHAR(50),
+    Country VARCHAR(50)
+);
+```
 
-- **Amazon.pbix** – Interactive Power BI dashboard file with visuals, charts, and insights.
-- **Report.docx** – Detailed written analysis and findings from the project (dataset summary, business questions, results).
-- **Screenshot…png** – Preview image showing dashboard example / report snapshot.
-- **README.md** – This documentation.
+<br>
 
----
+### 2. 🧹 Data Exploration & Cleaning
 
-## 📌 Dataset
+#### -Record Count
 
-The raw Amazon sales dataset includes transactional order details such as:
+```sql
+SELECT COUNT(*)
+FROM Orders;
+```
 
-- Order IDs
-- Order dates
-- Product categories
-- Revenue & pricing
-- Quantity sold
-- Customer segments / regions
+#### -Unique Customers
 
+```sql
+SELECT COUNT(DISTINCT CustomerID)
+FROM Orders;
+```
 
+#### -Unique Categories
 
----
+```sql
+SELECT COUNT(DISTINCT Category)
+FROM Orders;
+```
 
-## 🧠 Methodology
+#### -Null Value Check
 
-### 1. Database Modeling (MySQL)
-- Imported raw data into MySQL.
-- Normalized tables to reduce redundancy.
-- Defined primary/foreign key relationships for sales facts and dimensions.
-- Used SQL for computing aggregated metrics (total revenue, monthly trends, product breakdowns).
+```sql
+SELECT *
+FROM Orders
+WHERE CustomerID IS NULL
+   OR ProductID IS NULL
+   OR ProductName IS NULL
+   OR Category IS NULL
+   OR TotalAmount IS NULL;
+```
 
-### 2. Analytics Using SQL
-Performed queries such as:
-- Total sales & revenue over time
-- Category-wise sales breakdown
-- Top products by revenue & volume
-- Regional performance
-- Order trends by month/quarter
+#### -Duplicate Order Check
 
-### 3. Visualization (Power BI)
-Built interactive dashboards to visualize:
-- Revenue trends (yearly, quarterly, monthly)
-- Sales distribution by product category
-- Geographic / regional sales heat maps
-- Top performing products
-- KPIs: Total Sales, Average Order Value, Growth %, etc.
+```sql
+SELECT OrderID, COUNT(*)
+FROM Orders
+GROUP BY OrderID
+HAVING COUNT(*) > 1;
+```
 
-## 📊 Key Insights (Examples)
+<br>
 
-✔ Revenue shows seasonal peaks.  
-✔ Certain categories contribute disproportionately to overall sales.  
-✔ Regional sales patterns help identify target markets.  
-✔ Interactive cards highlight top products and trend lines.
+### 3. 📊 Data Analysis & Insights
 
+The following SQL queries address 30+ business-focused questions using Amazon sales data.
 
+<br>
 
+#### 📌 Sample Questions:
 
+**- What is the total revenue generated?**
 
+```sql
+SELECT ROUND(SUM(TotalAmount),2) AS Total_Revenue
+FROM Orders;
+```
 
+<br>
 
+**- What is the average order value?**
 
+```sql
+SELECT ROUND(AVG(TotalAmount),2)
+FROM Orders;
+```
 
+<br>
 
+**- Which payment method is used most frequently?**
 
+```sql
+SELECT PaymentMethod,
+       COUNT(*) AS Total_Orders
+FROM Orders
+GROUP BY PaymentMethod
+ORDER BY Total_Orders DESC
+LIMIT 1;
+```
 
+<br>
 
+**- Which product generated the highest revenue?**
 
+```sql
+SELECT ProductName,
+       SUM(TotalAmount) AS Total_Revenue
+FROM Orders
+GROUP BY ProductName
+ORDER BY Total_Revenue DESC
+LIMIT 1;
+```
 
+<br>
 
+**- Top 10 customers by revenue**
 
+```sql
+SELECT CustomerName,
+       SUM(TotalAmount) AS Total_Spending
+FROM Orders
+GROUP BY CustomerName
+ORDER BY Total_Spending DESC
+LIMIT 10;
+```
 
+<br>
 
+**- Rank products by revenue**
 
+```sql
+SELECT ProductID,
+       ProductName,
+       SUM(TotalAmount) AS Total_Revenue,
+       RANK() OVER(
+           ORDER BY SUM(TotalAmount) DESC
+       ) AS Revenue_Rank
+FROM Orders
+GROUP BY ProductID, ProductName;
+```
 
+<br>
 
+#### Customer, Product, Revenue, and Seller Analysis Includes:
 
+<br>
 
+* Total revenue and order analysis
 
+  <br>
+
+* Monthly revenue trends
+
+  <br>
+
+* Month-over-month revenue growth
+
+  <br>
+
+* Product and category performance
+
+  <br>
+
+* Brand-wise sales analysis
+
+  <br>
+
+* Top 10 customers by spending
+
+  <br>
+
+* Repeat purchase rate
+
+  <br>
+
+* City and state performance
+
+  <br>
+
+* Seller performance analysis
+
+  <br>
+
+* Delivered order percentage
+
+  <br>
+
+* High discount and low revenue product detection
+
+  <br>
+
+* Fraud detection using discount and quantity patterns
+
+  <br>
+
+#### ✔️ All queries are well-structured and use core SQL concepts such as GROUP BY, HAVING, WINDOW FUNCTIONS, RANK(), LAG(), SUBQUERIES, AGGREGATE FUNCTIONS, and DATE FUNCTIONS.
+
+<br>
+
+## 📈 Conclusion
+
+**This project provides a practical understanding of SQL in an e-commerce business environment. It covers:**
+
+<br>
+
+* Database design and management
+
+  <br>
+
+* Data validation and cleaning
+
+  <br>
+
+* Exploratory data analysis
+
+  <br>
+
+* Customer behavior analysis
+
+  <br>
+
+* Revenue and profitability analysis
+
+  <br>
+
+* Advanced SQL querying techniques
+
+  <br>
+
+**The insights generated help businesses understand:**
+
+<br>
+
+* Customer purchasing patterns
+
+  <br>
+
+* Product and category performance
+
+  <br>
+
+* Revenue growth trends
+
+  <br>
+
+* Seller effectiveness
+
+  <br>
+
+* Regional sales performance
+
+  <br>
+
+* Opportunities for business optimization
+
+  <br>
+
+## 💻 Tools & Technologies
+
+* SQL (MySQL)
+
+  <br>
+
+* MySQL Workbench
+
+  <br>
+
+* Power BI
+
+  <br>
+
+## 👨‍💻 Author
+
+**Mauzzam**
+
+* **GitHub:** https://github.com/MAUZZAM123
+* **LinkedIn:** Add Your LinkedIn Profile
+
+## 🌟 Feedback & Support
+
+Feel free to share suggestions or improvements.
+
+If you found this project useful, please consider giving it a ⭐️ on GitHub.
