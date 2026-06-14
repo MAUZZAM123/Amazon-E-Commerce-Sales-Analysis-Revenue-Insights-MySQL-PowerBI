@@ -185,51 +185,17 @@ GROUP BY ProductID, ProductName;
 
 * Total revenue and order analysis
 
-  <br>
-
 * Monthly revenue trends
-
-  <br>
-
 * Month-over-month revenue growth
-
-  <br>
-
 * Product and category performance
-
-  <br>
-
 * Brand-wise sales analysis
-
-  <br>
-
 * Top 10 customers by spending
-
-  <br>
-
 * Repeat purchase rate
-
-  <br>
-
 * City and state performance
-
-  <br>
-
 * Seller performance analysis
-
-  <br>
-
 * Delivered order percentage
-
-  <br>
-
 * High discount and low revenue product detection
-
-  <br>
-
 * Fraud detection using discount and quantity patterns
-
-  <br>
 
 #### ✔️ All queries are well-structured and use core SQL concepts such as GROUP BY, HAVING, WINDOW FUNCTIONS, RANK(), LAG(), SUBQUERIES, AGGREGATE FUNCTIONS, and DATE FUNCTIONS.
 
@@ -242,77 +208,39 @@ GROUP BY ProductID, ProductName;
 <br>
 
 * Database design and management
-
-  <br>
-
 * Data validation and cleaning
-
-  <br>
-
 * Exploratory data analysis
-
-  <br>
-
 * Customer behavior analysis
-
-  <br>
-
 * Revenue and profitability analysis
-
-  <br>
-
 * Advanced SQL querying techniques
-
-  <br>
 
 **The insights generated help businesses understand:**
 
 <br>
 
 * Customer purchasing patterns
-
-  <br>
-
 * Product and category performance
-
-  <br>
-
 * Revenue growth trends
-
-  <br>
-
 * Seller effectiveness
-
-  <br>
-
 * Regional sales performance
-
-  <br>
-
 * Opportunities for business optimization
 
-  <br>
 
 ## 💻 Tools & Technologies
 
 * SQL (MySQL)
 
-  <br>
-
 * MySQL Workbench
-
-  <br>
 
 * Power BI
 
-  <br>
 
 ## 👨‍💻 Author
 
 **Mauzzam**
 
-* **GitHub:** https://github.com/MAUZZAM123
-* **LinkedIn:** Add Your LinkedIn Profile
+* **GitHub:**[ Github Profile](https://github.com/MAUZZAM123)
+* **LinkedIn:[**inkedIn Profile](https://www.linkedin.com/in/mauzzamshaikh1104/)
 
 ## 🌟 Feedback & Support
 
