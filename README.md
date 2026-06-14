@@ -240,7 +240,7 @@ GROUP BY ProductID, ProductName;
 **Mauzzam**
 
 * **GitHub:**[ Github Profile](https://github.com/MAUZZAM123)
-* **LinkedIn:[**inkedIn Profile](https://www.linkedin.com/in/mauzzamshaikh1104/)
+* **LinkedIn:**[inkedIn Profile](https://www.linkedin.com/in/mauzzamshaikh1104/)
 
 ## 🌟 Feedback & Support
 
